@@ -1,0 +1,17 @@
+//
+//  GameProtocol.swift
+//  Square Off AR
+//
+//  Created by Rafal Grodzinski on 12/08/2017.
+//  Copyright © 2017 UnalignedByte. All rights reserved.
+//
+
+import SceneKit
+
+protocol GameProtocol {
+    var scene: SCNScene { get }
+}
+
+extension GameProtocol where Self: SCNScene {
+    var scene: SCNScene { return self }
+}
