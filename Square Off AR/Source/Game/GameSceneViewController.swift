@@ -28,7 +28,6 @@ class GameSceneViewController: UIViewController, Presentable {
     override func viewDidLoad() {
         setupARScene()
         setupTouchDetection()
-        game.startGame()
     }
 
     private lazy var arView: ARSCNView = {
@@ -68,6 +67,8 @@ class GameSceneViewController: UIViewController, Presentable {
 
 extension GameSceneViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        hitTestSurface()
+        
         guard let currentFrame = arView.session.currentFrame else { return }
         // Camera
         let cameraTransform = SCNMatrix4(simdMatrix: currentFrame.camera.transform)

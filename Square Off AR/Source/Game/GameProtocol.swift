@@ -9,11 +9,7 @@
 import ARKit
 
 protocol GameProtocol {
-    // MARK: - Initialization
     var scene: SCNScene { get }
-    func startGame()
-    
-    // MARK: - Update
     func tapped()
     func updated(cameraTransform: SCNMatrix4)
     func updated(lightIntensity: CGFloat)
