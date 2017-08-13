@@ -6,10 +6,19 @@
 //  Copyright © 2017 UnalignedByte. All rights reserved.
 //
 
-import SceneKit
+import ARKit
 
 protocol GameProtocol {
+    // MARK: - Initialization
     var scene: SCNScene { get }
+    func startGame()
+    
+    // MARK: - Update
+    func tapped()
+    func updated(cameraTransform: SCNMatrix4)
+    func updated(lightIntensity: CGFloat)
+    var isLookingForSurface: Bool { get }
+    func foundSurface(for result: ARHitTestResult)
 }
 
 extension GameProtocol where Self: SCNScene {

@@ -28,10 +28,14 @@ class GameSceneViewController: UIViewController, Presentable {
     override func viewDidLoad() {
         setupARScene()
         setupTouchDetection()
+        game.startGame()
     }
 
-    private func setupARScene() {
+    private lazy var arView: ARSCNView = {
         guard let arView = view as? ARSCNView else { fatalError() }
+        return arView
+    }()
+    private func setupARScene() {
         arView.delegate = self
         arView.scene = game.scene
         arView.automaticallyUpdatesLighting = true
@@ -47,8 +51,29 @@ class GameSceneViewController: UIViewController, Presentable {
 
     // MARK: - Actions
     @objc private func tappedAction(_ sender: UITapGestureRecognizer) {
+        game.tapped()
+    }
+
+    // MARK: - Private
+    private func hitTestSurface() {
+        if !game.isLookingForSurface { return }
+
+        DispatchQueue.main.async { [weak self] in
+            if let result = self?.arView.hitTest(self!.view.frame.center, types: .featurePoint).first {
+                self?.game.foundSurface(for: result)
+            }
+        }
     }
 }
 
 extension GameSceneViewController: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        guard let currentFrame = arView.session.currentFrame else { return }
+        // Camera
+        let cameraTransform = SCNMatrix4(simdMatrix: currentFrame.camera.transform)
+        game.updated(cameraTransform: cameraTransform)
+        // Light
+        guard let ligthEstimate = currentFrame.lightEstimate else { return }
+        game.updated(lightIntensity: ligthEstimate.ambientIntensity)
+    }
 }

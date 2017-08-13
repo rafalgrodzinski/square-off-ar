@@ -14,6 +14,10 @@
 		B56ED6831F3F5A0200C6FA20 /* GameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6821F3F5A0200C6FA20 /* GameSceneViewController.swift */; };
 		B56ED6851F3F5EEB00C6FA20 /* GameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6841F3F5EEB00C6FA20 /* GameProtocol.swift */; };
 		B56ED6871F3F600C00C6FA20 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6861F3F600C00C6FA20 /* Game.swift */; };
+		B5D6F1B81F405CA60057F7E2 /* GameLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1B71F405CA60057F7E2 /* GameLogicProtocol.swift */; };
+		B5D6F1BA1F405CAD0057F7E2 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1B91F405CAD0057F7E2 /* GameLogic.swift */; };
+		B5D6F1BC1F405E4C0057F7E2 /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */; };
+		B5D6F1BE1F4060AA0057F7E2 /* SCNMatrix4Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1BD1F4060AA0057F7E2 /* SCNMatrix4Extension.swift */; };
 		C17D122949535B1562596A97 /* Pods_Square_Off_AR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36346C47AA4E5B394946B990 /* Pods_Square_Off_AR.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +33,10 @@
 		B56ED6841F3F5EEB00C6FA20 /* GameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocol.swift; sourceTree = "<group>"; };
 		B56ED6861F3F600C00C6FA20 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		B5A762171F3CF51800C90EC8 /* Square Off AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square Off AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5D6F1B71F405CA60057F7E2 /* GameLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogicProtocol.swift; sourceTree = "<group>"; };
+		B5D6F1B91F405CAD0057F7E2 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
+		B5D6F1BD1F4060AA0057F7E2 /* SCNMatrix4Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMatrix4Extension.swift; sourceTree = "<group>"; };
 		BCC493ED9D65BCC94D6817DC /* Pods-Square Off AR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Square Off AR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Square Off AR/Pods-Square Off AR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +93,8 @@
 			children = (
 				B56ED6791F3D016B00C6FA20 /* AppDelegate.swift */,
 				B56ED6801F3F4EAF00C6FA20 /* Presentable.swift */,
+				B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */,
+				B5D6F1BD1F4060AA0057F7E2 /* SCNMatrix4Extension.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -103,6 +113,8 @@
 				B56ED6821F3F5A0200C6FA20 /* GameSceneViewController.swift */,
 				B56ED6841F3F5EEB00C6FA20 /* GameProtocol.swift */,
 				B56ED6861F3F600C00C6FA20 /* Game.swift */,
+				B5D6F1B71F405CA60057F7E2 /* GameLogicProtocol.swift */,
+				B5D6F1B91F405CAD0057F7E2 /* GameLogic.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -255,10 +267,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56ED67C1F3D017600C6FA20 /* AppDelegate.swift in Sources */,
+				B5D6F1BE1F4060AA0057F7E2 /* SCNMatrix4Extension.swift in Sources */,
 				B56ED6831F3F5A0200C6FA20 /* GameSceneViewController.swift in Sources */,
 				B56ED6811F3F4EAF00C6FA20 /* Presentable.swift in Sources */,
 				B56ED6871F3F600C00C6FA20 /* Game.swift in Sources */,
+				B5D6F1B81F405CA60057F7E2 /* GameLogicProtocol.swift in Sources */,
+				B5D6F1BC1F405E4C0057F7E2 /* CGRectExtension.swift in Sources */,
 				B56ED6851F3F5EEB00C6FA20 /* GameProtocol.swift in Sources */,
+				B5D6F1BA1F405CAD0057F7E2 /* GameLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

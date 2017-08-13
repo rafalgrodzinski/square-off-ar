@@ -17,8 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(Presentable.self, name: "GameScene") { r in
             GameSceneViewController(game: r.resolve(GameProtocol.self)!)
         }
-        container.register(GameProtocol.self) { _ in
-            Game()
+        container.register(GameProtocol.self) { r in
+            Game(gameLogic: r.resolve(GameLogicProtocol.self)!)
+        }
+        container.register(GameLogicProtocol.self) { _ in
+            GameLogic()
         }
         return container
     }()
