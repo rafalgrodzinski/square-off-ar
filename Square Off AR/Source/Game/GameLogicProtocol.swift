@@ -6,5 +6,16 @@
 //  Copyright © 2017 UnalignedByte. All rights reserved.
 //
 
+enum GameState {
+    case lookingForSurface
+    case placingBoard
+    case waitingForMove
+    case checkingResult
+}
+
 protocol GameLogicProtocol {
+    var state: GameState { get }
+
+    func surfaceFound()
+    func boardPlaced()
 }
