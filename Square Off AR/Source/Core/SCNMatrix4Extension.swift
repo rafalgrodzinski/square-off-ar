@@ -17,4 +17,8 @@ extension SCNMatrix4
                   m31: simdMatrix.columns.2.x, m32: simdMatrix.columns.2.y, m33: simdMatrix.columns.2.z, m34: simdMatrix.columns.2.w,
                   m41: simdMatrix.columns.3.x, m42: simdMatrix.columns.3.y, m43: simdMatrix.columns.3.z, m44: simdMatrix.columns.3.w)
     }
+
+    var translationMatrix: SCNMatrix4 {
+        return SCNMatrix4MakeTranslation(m41, m42, m43)
+    }
 }

@@ -10,11 +10,12 @@ import ARKit
 
 protocol GameProtocol {
     var scene: SCNScene { get }
-    func tapped()
-    func updated(cameraTransform: SCNMatrix4)
-    func updated(lightIntensity: CGFloat)
     var isLookingForSurface: Bool { get }
-    func foundSurface(for result: ARHitTestResult)
+    func tapped()
+    func touchedDown()
+    func touchedUp()
+    func update(cameraTransform: SCNMatrix4)
+    func update(surfaceTransform: SCNMatrix4)
 }
 
 extension GameProtocol where Self: SCNScene {

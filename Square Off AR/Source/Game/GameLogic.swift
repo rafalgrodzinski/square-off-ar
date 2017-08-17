@@ -7,8 +7,21 @@
 //
 
 class GameLogic {
+    // MARK: - Initialization
+    var blockFactory: BlockGeneratable
+
+    init(blockFactory: BlockGeneratable) {
+        self.blockFactory = blockFactory
+    }
+
     // MARK: - State
     var gameState: GameState = .lookingForSurface
+    var delegate: GameLogicDelegate?
+
+    func showNewBlock() {
+        let block = blockFactory.generateBlock()
+        delegate?.present(block: block)
+    }
 }
 
 extension GameLogic: GameLogicProtocol {
@@ -20,5 +33,10 @@ extension GameLogic: GameLogicProtocol {
 
     func boardPlaced() {
         gameState = .waitingForMove
+        showNewBlock()
+    }
+
+    func blockPlaced() {
+        showNewBlock()
     }
 }

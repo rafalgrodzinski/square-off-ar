@@ -20,8 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(GameProtocol.self) { r in
             Game(gameLogic: r.resolve(GameLogicProtocol.self)!)
         }
-        container.register(GameLogicProtocol.self) { _ in
-            GameLogic()
+        container.register(GameLogicProtocol.self) { r in
+            GameLogic(blockFactory: r.resolve(BlockGeneratable.self)!)
+        }.initCompleted { r, c in
+            let gameLogic = c as! GameLogic
+            gameLogic.delegate = r.resolve(GameProtocol.self) as? GameLogicDelegate
+        }
+        container.register(BlockGeneratable.self) { _ in
+            BlockFactory()
         }
         return container
     }()

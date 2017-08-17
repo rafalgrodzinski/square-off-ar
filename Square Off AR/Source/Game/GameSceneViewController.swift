@@ -37,9 +37,7 @@ class GameSceneViewController: UIViewController, Presentable {
     private func setupARScene() {
         arView.delegate = self
         arView.scene = game.scene
-        arView.automaticallyUpdatesLighting = true
         let arConfig = ARWorldTrackingConfiguration()
-        arConfig.planeDetection = .horizontal
         arView.session.run(arConfig)
         arView.showsStatistics = true
     }
@@ -53,13 +51,31 @@ class GameSceneViewController: UIViewController, Presentable {
         game.tapped()
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        game.touchedDown()
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touchesEnded(touches, with: event)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        game.touchedUp()
+    }
+
     // MARK: - Private
     private func hitTestSurface() {
         if !game.isLookingForSurface { return }
 
         DispatchQueue.main.async { [weak self] in
             if let result = self?.arView.hitTest(self!.view.frame.center, types: .featurePoint).first {
-                self?.game.foundSurface(for: result)
+                var transform: SCNMatrix4!
+                if let anchor = result.anchor {
+                    transform = SCNMatrix4(simdMatrix: anchor.transform)
+                } else {
+                    transform = SCNMatrix4(simdMatrix: result.worldTransform)
+                }
+                self?.game.update(surfaceTransform: transform)
             }
         }
     }
@@ -68,13 +84,9 @@ class GameSceneViewController: UIViewController, Presentable {
 extension GameSceneViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         hitTestSurface()
-        
-        guard let currentFrame = arView.session.currentFrame else { return }
         // Camera
-        let cameraTransform = SCNMatrix4(simdMatrix: currentFrame.camera.transform)
-        game.updated(cameraTransform: cameraTransform)
-        // Light
-        guard let ligthEstimate = currentFrame.lightEstimate else { return }
-        game.updated(lightIntensity: ligthEstimate.ambientIntensity)
+        guard let currentFrame = arView.session.currentFrame else { return }
+        let transform = SCNMatrix4(simdMatrix: currentFrame.camera.transform)
+        game.update(cameraTransform: transform)
     }
 }
