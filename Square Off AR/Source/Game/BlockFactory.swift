@@ -10,7 +10,7 @@ import SceneKit
 
 class BlockFactory {
     // MARK: - Private
-    private let blockNames: [String] = ["Block A"]
+    private let blockNames: [String] = ["Block A", "Block B", "Block C", "Block D", "Block E"]
 }
 
 extension BlockFactory: BlockGeneratable {

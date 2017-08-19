@@ -78,7 +78,8 @@ extension Game: GameProtocol {
                 placeBoard()
             case .waitingForMove:
                 currentBlock?.physicsBody?.collisionBitMask = -1
-                 currentBlock?.physicsBody?.isAffectedByGravity = true
+                currentBlock?.physicsBody?.isAffectedByGravity = true
+                currentBlock?.opacity = 1.0
                 currentBlock = nil
                 gameLogic.blockPlaced()
             default:
@@ -97,7 +98,7 @@ extension Game: GameProtocol {
     func update(cameraTransform: SCNMatrix4) {
         if isHoldingCamera { return }
         let newTransform = rootNode.convertTransform(cameraTransform, from: nil)
-        let translation = SCNMatrix4MakeTranslation(0.0, 0.0, -0.5)
+        let translation = SCNMatrix4MakeTranslation(0.0, 0.0, -1.0)
         currentBlock?.transform = SCNMatrix4Mult(translation, newTransform)
     }
 
@@ -115,6 +116,7 @@ extension Game: GameProtocol {
 extension Game: GameLogicDelegate {
     func present(block: SCNNode) {
         currentBlock = block
+        currentBlock?.opacity = 0.5
         rootNode.addChildNode(block)
     }
 }
