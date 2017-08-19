@@ -77,7 +77,8 @@ extension Game: GameProtocol {
             case .placingBoard:
                 placeBoard()
             case .waitingForMove:
-                currentBlock?.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+                currentBlock?.physicsBody?.collisionBitMask = -1
+                 currentBlock?.physicsBody?.isAffectedByGravity = true
                 currentBlock = nil
                 gameLogic.blockPlaced()
             default:
