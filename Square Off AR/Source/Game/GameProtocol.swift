@@ -12,8 +12,7 @@ protocol GameProtocol {
     var scene: SCNScene { get }
     var isLookingForSurface: Bool { get }
     func tapped()
-    func touchedDown()
-    func touchedUp()
+    func swipped(direction: CGPoint)
     func update(cameraTransform: SCNMatrix4)
     func update(surfaceTransform: SCNMatrix4)
 }

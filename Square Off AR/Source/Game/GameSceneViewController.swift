@@ -44,6 +44,7 @@ class GameSceneViewController: UIViewController, Presentable {
 
     private func setupTouchDetection() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedAction)))
+        view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pannedAction)))
     }
 
     // MARK: - Actions
@@ -51,16 +52,15 @@ class GameSceneViewController: UIViewController, Presentable {
         game.tapped()
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        game.touchedDown()
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touchesEnded(touches, with: event)
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        game.touchedUp()
+    @objc private func pannedAction(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .ended {
+            game.swipped(direction: CGPoint.zero)
+        } else {
+            let translation = sender.translation(in: view)
+            let swipeTranslation = CGPoint(x: translation.x / view.frame.width,
+                                           y: translation.y / view.frame.width)
+            game.swipped(direction: swipeTranslation)
+        }
     }
 
     // MARK: - Private

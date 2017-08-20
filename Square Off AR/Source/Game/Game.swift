@@ -68,7 +68,10 @@ class Game: SCNScene {
 
     // MARK: - Private
     private var currentBlock: SCNNode?
-    private var isHoldingCamera = false
+    private var currentBlockRotX: Float = 0.0
+    private var currentBlockRotY: Float = 0.0
+    private var currentBlockSavedRotX: Float = 0.0
+    private var currentBlockSavedRotY: Float = 0.0
 }
 
 extension Game: GameProtocol {    
@@ -80,6 +83,8 @@ extension Game: GameProtocol {
                 currentBlock?.physicsBody?.collisionBitMask = -1
                 currentBlock?.physicsBody?.isAffectedByGravity = true
                 currentBlock?.opacity = 1.0
+                currentBlockRotX = 0.0
+                currentBlockRotY = 0.0
                 currentBlock = nil
                 gameLogic.blockPlaced()
             default:
@@ -87,19 +92,40 @@ extension Game: GameProtocol {
         }
     }
 
-    func touchedDown() {
-        isHoldingCamera = true
-    }
+    func swipped(direction: CGPoint) {
+        let angleX = Float(direction.y) * Float.pi
+        let angleY = -Float(direction.x) * Float.pi
 
-    func touchedUp() {
-        isHoldingCamera = false
+        if direction == CGPoint.zero {
+            currentBlockSavedRotX = currentBlockRotX
+            currentBlockSavedRotY = currentBlockRotY
+        }
+
+        currentBlockRotX = currentBlockSavedRotX + angleX
+        currentBlockRotY = currentBlockSavedRotY + angleY
     }
 
     func update(cameraTransform: SCNMatrix4) {
-        if isHoldingCamera { return }
         let newTransform = rootNode.convertTransform(cameraTransform, from: nil)
         let translation = SCNMatrix4MakeTranslation(0.0, 0.0, -1.0)
-        currentBlock?.transform = SCNMatrix4Mult(translation, newTransform)
+        let translated = SCNMatrix4Mult(translation, newTransform)
+        currentBlock?.transform = translated
+
+        var rotationQuaternion = GLKQuaternionIdentity
+        // X rotation
+        var xAxisRotation = GLKVector3Make(0.0, 1.0, 0.0)
+        xAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(rotationQuaternion), xAxisRotation)
+        rotationQuaternion = GLKQuaternionMultiply(rotationQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(currentBlockRotX), xAxisRotation))
+
+        // Y rotation
+        var yAxisRotation = GLKVector3Make(1.0, 0.0, 0.0)
+        yAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(rotationQuaternion), yAxisRotation)
+        rotationQuaternion = GLKQuaternionMultiply(rotationQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(currentBlockRotY), yAxisRotation))
+
+        let newRotationMatrix = GLKMatrix4MakeWithQuaternion(rotationQuaternion)
+        let scnNewRotationMatrix = SCNMatrix4FromGLKMatrix4(newRotationMatrix)
+        currentBlock?.transform = SCNMatrix4Mult(scnNewRotationMatrix, currentBlock!.transform)
+
     }
 
     var isLookingForSurface: Bool {
