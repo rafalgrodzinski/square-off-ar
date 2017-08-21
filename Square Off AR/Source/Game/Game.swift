@@ -86,7 +86,9 @@ extension Game: GameProtocol {
             case .waitingForMove:
                 currentBlock?.physicsBody?.collisionBitMask = -1
                 currentBlock?.physicsBody?.isAffectedByGravity = true
-                currentBlock?.opacity = 1.0
+                let fadeAction = SCNAction.fadeIn(duration: 0.3)
+                fadeAction.timingMode = .easeInEaseOut
+                currentBlock?.runAction(fadeAction)
                 currentBlockRotX = 0.0
                 currentBlockRotY = 0.0
                 gameLogic.blockPlaced()
@@ -150,7 +152,10 @@ extension Game: GameProtocol {
 extension Game: GameLogicDelegate {
     func present(block: SCNNode) {
         currentBlock = block
-        currentBlock?.opacity = 0.5
+        currentBlock?.opacity = 0.0
+        let fadeAction = SCNAction.fadeOpacity(to: 0.5, duration: 0.3)
+        fadeAction.timingMode = .easeInEaseOut
+        currentBlock?.runAction(fadeAction)
         rootNode.addChildNode(block)
     }
 }
