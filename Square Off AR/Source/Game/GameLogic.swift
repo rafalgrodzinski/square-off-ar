@@ -37,6 +37,11 @@ extension GameLogic: GameLogicProtocol {
     }
 
     func blockPlaced() {
+        gameState = .checkingResult
+    }
+
+    func blockStabilized() {
+        gameState = .waitingForMove
         showNewBlock()
     }
 }

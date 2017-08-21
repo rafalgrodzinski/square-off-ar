@@ -75,7 +75,7 @@ class GameSceneViewController: UIViewController, Presentable {
                 } else {
                     transform = SCNMatrix4(simdMatrix: result.worldTransform)
                 }
-                self?.game.update(surfaceTransform: transform)
+                self?.game.updated(surfaceTransform: transform)
             }
         }
     }
@@ -87,6 +87,10 @@ extension GameSceneViewController: ARSCNViewDelegate {
         // Camera
         guard let currentFrame = arView.session.currentFrame else { return }
         let transform = SCNMatrix4(simdMatrix: currentFrame.camera.transform)
-        game.update(cameraTransform: transform)
+        game.updated(cameraTransform: transform)
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didSimulatePhysicsAtTime time: TimeInterval) {
+        game.updatedPhysics()
     }
 }

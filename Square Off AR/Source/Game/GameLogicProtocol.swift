@@ -19,4 +19,5 @@ protocol GameLogicProtocol {
     func surfaceFound()
     func boardPlaced()
     func blockPlaced()
+    func blockStabilized()
 }

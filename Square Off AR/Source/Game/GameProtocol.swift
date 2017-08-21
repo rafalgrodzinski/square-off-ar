@@ -13,8 +13,10 @@ protocol GameProtocol {
     var isLookingForSurface: Bool { get }
     func tapped()
     func swipped(direction: CGPoint)
-    func update(cameraTransform: SCNMatrix4)
-    func update(surfaceTransform: SCNMatrix4)
+    func updated(cameraTransform: SCNMatrix4)
+    func updated(surfaceTransform: SCNMatrix4)
+    func updatedPhysics()
+
 }
 
 extension GameProtocol where Self: SCNScene {

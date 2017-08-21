@@ -74,7 +74,11 @@ class Game: SCNScene {
     private var currentBlockSavedRotY: Float = 0.0
 }
 
-extension Game: GameProtocol {    
+extension Game: GameProtocol {
+    var isLookingForSurface: Bool {
+        return gameLogic.state == .lookingForSurface || gameLogic.state == .placingBoard
+    }
+    
     func tapped() {
         switch gameLogic.state {
             case .placingBoard:
@@ -85,7 +89,6 @@ extension Game: GameProtocol {
                 currentBlock?.opacity = 1.0
                 currentBlockRotX = 0.0
                 currentBlockRotY = 0.0
-                currentBlock = nil
                 gameLogic.blockPlaced()
             default:
                 break
@@ -105,7 +108,9 @@ extension Game: GameProtocol {
         currentBlockRotY = currentBlockSavedRotY + angleY
     }
 
-    func update(cameraTransform: SCNMatrix4) {
+    func updated(cameraTransform: SCNMatrix4) {
+        if gameLogic.state != .waitingForMove { return }
+        
         let newTransform = rootNode.convertTransform(cameraTransform, from: nil)
         let translation = SCNMatrix4MakeTranslation(0.0, 0.0, -1.0)
         let translated = SCNMatrix4Mult(translation, newTransform)
@@ -128,14 +133,17 @@ extension Game: GameProtocol {
 
     }
 
-    var isLookingForSurface: Bool {
-        return gameLogic.state == .lookingForSurface || gameLogic.state == .placingBoard
-    }
-
-    func update(surfaceTransform: SCNMatrix4) {
+    func updated(surfaceTransform: SCNMatrix4) {
         showPlaceholder()
         gameLogic.surfaceFound()
         update(sceneTransform: surfaceTransform)
+    }
+
+    func updatedPhysics() {
+        if gameLogic.state == .checkingResult && currentBlock?.physicsBody?.isResting == true {
+            currentBlock = nil
+            gameLogic.blockStabilized()
+        }
     }
 }
 
