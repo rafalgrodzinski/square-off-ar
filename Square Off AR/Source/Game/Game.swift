@@ -73,10 +73,8 @@ class Game: SCNScene {
 
     // MARK: - Private
     private var currentBlock: SCNNode?
-    private var currentBlockRotX: Float = 0.0
-    private var currentBlockRotY: Float = 0.0
-    private var currentBlockSavedRotX: Float = 0.0
-    private var currentBlockSavedRotY: Float = 0.0
+    private var currentBlockLastSwipe = CGPoint.zero
+    private var currentBlockQuaternion = GLKQuaternionIdentity
 }
 
 extension Game: GameProtocol {
@@ -94,8 +92,6 @@ extension Game: GameProtocol {
                 let fadeAction = SCNAction.fadeIn(duration: 0.3)
                 fadeAction.timingMode = .easeInEaseOut
                 currentBlock?.runAction(fadeAction)
-                currentBlockRotX = 0.0
-                currentBlockRotY = 0.0
                 gameLogic.blockPlaced()
             default:
                 break
@@ -103,16 +99,26 @@ extension Game: GameProtocol {
     }
 
     func swipped(direction: CGPoint) {
-        let angleX = Float(direction.y) * Float.pi
-        let angleY = -Float(direction.x) * Float.pi
-
-        if direction == CGPoint.zero {
-            currentBlockSavedRotX = currentBlockRotX
-            currentBlockSavedRotY = currentBlockRotY
+        if currentBlockLastSwipe == CGPoint.zero || direction == CGPoint.zero {
+            currentBlockLastSwipe = direction
+            return
         }
 
-        currentBlockRotX = currentBlockSavedRotX + angleX
-        currentBlockRotY = currentBlockSavedRotY + angleY
+        // X Axis
+        let angleX = Float(direction.x - currentBlockLastSwipe.x) * Float.pi
+
+        var xAxisRotation = GLKVector3Make(1.0, 0.0, 0.0)
+        xAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(currentBlockQuaternion), xAxisRotation)
+        currentBlockQuaternion = GLKQuaternionMultiply(currentBlockQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(-angleX), xAxisRotation))
+
+        // Y Axis
+        let angleY = Float(direction.y - currentBlockLastSwipe.y) * Float.pi
+
+        var yAxisRotation = GLKVector3Make(0.0, 1.0, 0.0)
+        yAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(currentBlockQuaternion), yAxisRotation)
+        currentBlockQuaternion = GLKQuaternionMultiply(currentBlockQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(angleY), yAxisRotation))
+
+        currentBlockLastSwipe = direction
     }
 
     func updated(cameraTransform: SCNMatrix4) {
@@ -123,21 +129,9 @@ extension Game: GameProtocol {
         let translated = SCNMatrix4Mult(translation, newTransform)
         currentBlock?.transform = translated
 
-        var rotationQuaternion = GLKQuaternionIdentity
-        // X rotation
-        var xAxisRotation = GLKVector3Make(0.0, 1.0, 0.0)
-        xAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(rotationQuaternion), xAxisRotation)
-        rotationQuaternion = GLKQuaternionMultiply(rotationQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(currentBlockRotX), xAxisRotation))
-
-        // Y rotation
-        var yAxisRotation = GLKVector3Make(1.0, 0.0, 0.0)
-        yAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(rotationQuaternion), yAxisRotation)
-        rotationQuaternion = GLKQuaternionMultiply(rotationQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(currentBlockRotY), yAxisRotation))
-
-        let newRotationMatrix = GLKMatrix4MakeWithQuaternion(rotationQuaternion)
+        let newRotationMatrix = GLKMatrix4MakeWithQuaternion(currentBlockQuaternion)
         let scnNewRotationMatrix = SCNMatrix4FromGLKMatrix4(newRotationMatrix)
         currentBlock?.transform = SCNMatrix4Mult(scnNewRotationMatrix, currentBlock!.transform)
-
     }
 
     func updated(surfaceTransform: SCNMatrix4) {
@@ -157,6 +151,7 @@ extension Game: GameProtocol {
 
 extension Game: GameLogicDelegate {
     func present(block: SCNNode) {
+        currentBlockQuaternion = GLKQuaternionIdentity
         currentBlock = block
         currentBlock?.opacity = 0.0
         let fadeAction = SCNAction.fadeOpacity(to: 0.5, duration: 0.3)
