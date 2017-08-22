@@ -36,17 +36,22 @@ class Game: SCNScene {
     var floorNode: SCNNode?
     private func setupFloor() {
         let floorNode = SCNNode(geometry: SCNFloor())
+        floorNode.name = "Floor"
         floorNode.geometry?.firstMaterial?.lightingModel = .physicallyBased
         floorNode.geometry?.firstMaterial?.diffuse.contents = UIColor.white
         floorNode.geometry?.firstMaterial?.colorBufferWriteMask = []
         floorNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         floorNode.physicsBody?.isAffectedByGravity = false
+        floorNode.physicsBody?.categoryBitMask = 1
+        floorNode.physicsBody?.contactTestBitMask = -1
+        floorNode.physicsBody?.collisionBitMask = 1
         rootNode.addChildNode(floorNode)
         self.floorNode = floorNode
     }
 
     private func setupGravity() {
         scene.physicsWorld.gravity = SCNVector3(0.0, -9.8, 0.0)
+        physicsWorld.contactDelegate = self
     }
 
     // MARK: - Update
@@ -84,7 +89,7 @@ extension Game: GameProtocol {
             case .placingBoard:
                 placeBoard()
             case .waitingForMove:
-                currentBlock?.physicsBody?.collisionBitMask = -1
+                currentBlock?.physicsBody?.categoryBitMask = 1
                 currentBlock?.physicsBody?.isAffectedByGravity = true
                 let fadeAction = SCNAction.fadeIn(duration: 0.3)
                 fadeAction.timingMode = .easeInEaseOut
@@ -144,7 +149,8 @@ extension Game: GameProtocol {
     func updatedPhysics() {
         if gameLogic.state == .checkingResult && currentBlock?.physicsBody?.isResting == true {
             currentBlock = nil
-            gameLogic.blockStabilized()
+            let height = rootNode.boundingBox.max.y - rootNode.boundingBox.min.y
+            gameLogic.blockStabilized(with: height)
         }
     }
 }
@@ -157,5 +163,19 @@ extension Game: GameLogicDelegate {
         fadeAction.timingMode = .easeInEaseOut
         currentBlock?.runAction(fadeAction)
         rootNode.addChildNode(block)
+    }
+}
+
+extension Game: SCNPhysicsContactDelegate {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        if gameLogic.state != .checkingResult { return }
+        var isFloor = false
+        isFloor = contact.nodeA === floorNode || contact.nodeB === floorNode
+        var isBoard = false
+        isBoard = contact.nodeA === boardNode || contact.nodeB === boardNode
+
+        if isFloor && !isBoard {
+            gameLogic.blocksCollapsed()
+        }
     }
 }

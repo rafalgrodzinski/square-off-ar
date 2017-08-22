@@ -11,6 +11,7 @@ enum GameState {
     case placingBoard
     case waitingForMove
     case checkingResult
+    case gameFinished
 }
 
 protocol GameLogicProtocol {
@@ -19,5 +20,6 @@ protocol GameLogicProtocol {
     func surfaceFound()
     func boardPlaced()
     func blockPlaced()
-    func blockStabilized()
+    func blockStabilized(with height: Float)
+    func blocksCollapsed()
 }
