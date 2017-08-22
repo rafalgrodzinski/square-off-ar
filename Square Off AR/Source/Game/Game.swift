@@ -71,6 +71,31 @@ class Game: SCNScene {
         floorNode?.transform = sceneTransform
     }
 
+    private func rotateCurrentBlock(angleX: Float, angleY: Float) {
+        // X Axis
+        var xAxisRotation = GLKVector3Make(1.0, 0.0, 0.0)
+        xAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(currentBlockQuaternion), xAxisRotation)
+        currentBlockQuaternion = GLKQuaternionMultiply(currentBlockQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(-angleX), xAxisRotation))
+
+        // Y Axis
+        var yAxisRotation = GLKVector3Make(0.0, 1.0, 0.0)
+        yAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(currentBlockQuaternion), yAxisRotation)
+        currentBlockQuaternion = GLKQuaternionMultiply(currentBlockQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(angleY), yAxisRotation))
+    }
+
+    private func updateCurrentBlockTransform(transform: SCNMatrix4, rotationQuaternion: GLKQuaternion) {
+        guard let currentBlock = currentBlock else { fatalError() }
+
+        let newTransform = rootNode.convertTransform(transform, from: nil)
+        let translation = SCNMatrix4MakeTranslation(0.0, 0.0, -1.0)
+        let translated = SCNMatrix4Mult(translation, newTransform)
+        currentBlock.transform = translated
+
+        let newRotationMatrix = GLKMatrix4MakeWithQuaternion(rotationQuaternion)
+        let scnNewRotationMatrix = SCNMatrix4FromGLKMatrix4(newRotationMatrix)
+        currentBlock.transform = SCNMatrix4Mult(scnNewRotationMatrix, currentBlock.transform)
+    }
+
     // MARK: - Private
     private var currentBlock: SCNNode?
     private var currentBlockLastSwipe = CGPoint.zero
@@ -104,34 +129,17 @@ extension Game: GameProtocol {
             return
         }
 
-        // X Axis
         let angleX = Float(direction.x - currentBlockLastSwipe.x) * Float.pi
-
-        var xAxisRotation = GLKVector3Make(1.0, 0.0, 0.0)
-        xAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(currentBlockQuaternion), xAxisRotation)
-        currentBlockQuaternion = GLKQuaternionMultiply(currentBlockQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(-angleX), xAxisRotation))
-
-        // Y Axis
         let angleY = Float(direction.y - currentBlockLastSwipe.y) * Float.pi
-
-        var yAxisRotation = GLKVector3Make(0.0, 1.0, 0.0)
-        yAxisRotation = GLKQuaternionRotateVector3(GLKQuaternionInvert(currentBlockQuaternion), yAxisRotation)
-        currentBlockQuaternion = GLKQuaternionMultiply(currentBlockQuaternion, GLKQuaternionMakeWithAngleAndVector3Axis(Float(angleY), yAxisRotation))
+        rotateCurrentBlock(angleX: angleX, angleY: angleY)
 
         currentBlockLastSwipe = direction
     }
 
     func updated(cameraTransform: SCNMatrix4) {
         if gameLogic.state != .waitingForMove { return }
-        
-        let newTransform = rootNode.convertTransform(cameraTransform, from: nil)
-        let translation = SCNMatrix4MakeTranslation(0.0, 0.0, -1.0)
-        let translated = SCNMatrix4Mult(translation, newTransform)
-        currentBlock?.transform = translated
 
-        let newRotationMatrix = GLKMatrix4MakeWithQuaternion(currentBlockQuaternion)
-        let scnNewRotationMatrix = SCNMatrix4FromGLKMatrix4(newRotationMatrix)
-        currentBlock?.transform = SCNMatrix4Mult(scnNewRotationMatrix, currentBlock!.transform)
+        updateCurrentBlockTransform(transform: cameraTransform, rotationQuaternion: currentBlockQuaternion)
     }
 
     func updated(surfaceTransform: SCNMatrix4) {
@@ -170,7 +178,7 @@ extension Game: SCNPhysicsContactDelegate {
         isBoard = contact.nodeA === boardNode || contact.nodeB === boardNode
 
         if isFloor && !isBoard {
-            gameLogic.blocksCollapsed()
+            //gameLogic.blocksCollapsed()
         }
     }
 }
