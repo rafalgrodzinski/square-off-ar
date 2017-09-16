@@ -42,6 +42,7 @@ class GameSceneViewController: UIViewController, Presentable {
         arView.overlaySKScene = gameOverlay.scene
         gameOverlay.showMainMenu()
         gameOverlay.playButtonPressed = { [weak self] in
+            self?.gameOverlay.showGameOverlay()
             self?.game.startGame()
         }
     }

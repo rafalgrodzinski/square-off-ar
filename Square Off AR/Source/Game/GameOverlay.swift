@@ -13,13 +13,26 @@ class GameOverlay: SKScene {
     // MARK: - Initialization
     override init() {
         super.init(size: UIScreen.main.bounds.size)
+        setupMenuItems()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
 
+    private func setupMenuItems() {
+        logo = SKSpriteNode(texture: SKTexture(imageNamed: "Logo"))
+        logo.position = CGPoint(x: size.width * 0.5, y: size.height * 0.8)
+
+        playButton = Button(defaultTexture: SKTexture(imageNamed: "Play Button"))
+        playButton.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+    }
+
+    private func setupGameItems() {
+    }
+
     // MARK: - Private
+    var logo: SKSpriteNode!
     var playButton: Button!
 }
 
@@ -31,11 +44,12 @@ extension GameOverlay: GameOverlayProtocol {
     }
 
     func showMainMenu() {
-        playButton = Button(defaultTexture: SKTexture(imageNamed: "Play Button"))
-        playButton.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+        removeAllChildren()
         addChild(playButton)
+        addChild(logo)
     }
 
     func showGameOverlay() {
+        removeAllChildren()
     }
 }
