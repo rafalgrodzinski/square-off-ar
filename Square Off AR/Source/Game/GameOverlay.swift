@@ -14,6 +14,7 @@ class GameOverlay: SKScene {
     override init() {
         super.init(size: UIScreen.main.bounds.size)
         setupMenuItems()
+        setupGameItems()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -29,11 +30,15 @@ class GameOverlay: SKScene {
     }
 
     private func setupGameItems() {
+        replayButton = Button(defaultTexture: SKTexture(imageNamed: "Replay Button"))
+        replayButton.position = CGPoint(x: replayButton.size.width * 0.75,
+                                        y: size.height - replayButton.size.height * 0.75)
     }
 
     // MARK: - Private
     var logo: SKSpriteNode!
     var playButton: Button!
+    var replayButton: Button!
 }
 
 // MARK: - GameOverlayProtocol
@@ -51,5 +56,6 @@ extension GameOverlay: GameOverlayProtocol {
 
     func showGameOverlay() {
         removeAllChildren()
+        addChild(replayButton)
     }
 }
