@@ -16,7 +16,7 @@ class GameLogic {
     }
 
     // MARK: - State
-    var gameState: GameState = .lookingForSurface
+    var gameState: GameState = .showingMenu
     var delegate: GameLogicDelegate?
 
     func showNewBlock() {
@@ -27,6 +27,10 @@ class GameLogic {
 
 extension GameLogic: GameLogicProtocol {
     var state: GameState { return gameState }
+
+    func gameStarted() {
+        gameState = .lookingForSurface
+    }
 
     func surfaceFound() {
         gameState = .placingBoard

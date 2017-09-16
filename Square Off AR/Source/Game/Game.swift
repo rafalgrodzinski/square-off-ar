@@ -106,6 +106,10 @@ extension Game: GameProtocol {
     var isLookingForSurface: Bool {
         return gameLogic.state == .lookingForSurface || gameLogic.state == .placingBoard
     }
+
+    func startGame() {
+        gameLogic.gameStarted()
+    }
     
     func tapped() {
         switch gameLogic.state {

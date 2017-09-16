@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50C467F1F6D6A1800422DAE /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C467E1F6D6A1800422DAE /* Button.swift */; };
+		B50C46811F6D6D9600422DAE /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C46801F6D6D9600422DAE /* UIViewExtension.swift */; };
+		B50C46831F6D6EA800422DAE /* GameOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C46821F6D6EA800422DAE /* GameOverlay.swift */; };
+		B50C46851F6D6EC500422DAE /* GameOverlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50C46841F6D6EC500422DAE /* GameOverlayProtocol.swift */; };
 		B50CC5621F4091C900447271 /* Wood.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4E2FB1F40910A00D0EF4B /* Wood.png */; };
 		B50CC5641F409ACA00447271 /* GameLogicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50CC5631F409ACA00447271 /* GameLogicDelegate.swift */; };
 		B50CC56A1F409CAE00447271 /* BlockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50CC5691F409CAE00447271 /* BlockFactory.swift */; };
@@ -34,6 +38,10 @@
 /* Begin PBXFileReference section */
 		045123E4924D3C3FEDAE32D0 /* Pods-Square Off AR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Square Off AR.release.xcconfig"; path = "Pods/Target Support Files/Pods-Square Off AR/Pods-Square Off AR.release.xcconfig"; sourceTree = "<group>"; };
 		36346C47AA4E5B394946B990 /* Pods_Square_Off_AR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Square_Off_AR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50C467E1F6D6A1800422DAE /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		B50C46801F6D6D9600422DAE /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		B50C46821F6D6EA800422DAE /* GameOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverlay.swift; sourceTree = "<group>"; };
+		B50C46841F6D6EC500422DAE /* GameOverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverlayProtocol.swift; sourceTree = "<group>"; };
 		B50CC5631F409ACA00447271 /* GameLogicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogicDelegate.swift; sourceTree = "<group>"; };
 		B50CC5691F409CAE00447271 /* BlockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockFactory.swift; sourceTree = "<group>"; };
 		B50CC56B1F409E6300447271 /* Block A.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block A.scn"; sourceTree = "<group>"; };
@@ -122,6 +130,8 @@
 				B56ED6801F3F4EAF00C6FA20 /* Presentable.swift */,
 				B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */,
 				B5D6F1BD1F4060AA0057F7E2 /* SCNMatrix4Extension.swift */,
+				B50C467E1F6D6A1800422DAE /* Button.swift */,
+				B50C46801F6D6D9600422DAE /* UIViewExtension.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -145,6 +155,8 @@
 				B5D6F1B91F405CAD0057F7E2 /* GameLogic.swift */,
 				B58600EE1F424B3000F2D328 /* BlockGeneratable.swift */,
 				B50CC5691F409CAE00447271 /* BlockFactory.swift */,
+				B50C46841F6D6EC500422DAE /* GameOverlayProtocol.swift */,
+				B50C46821F6D6EA800422DAE /* GameOverlay.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -305,8 +317,11 @@
 			files = (
 				B56ED67C1F3D017600C6FA20 /* AppDelegate.swift in Sources */,
 				B5D6F1BE1F4060AA0057F7E2 /* SCNMatrix4Extension.swift in Sources */,
+				B50C46851F6D6EC500422DAE /* GameOverlayProtocol.swift in Sources */,
 				B56ED6831F3F5A0200C6FA20 /* GameSceneViewController.swift in Sources */,
 				B58600EF1F424B3000F2D328 /* BlockGeneratable.swift in Sources */,
+				B50C46811F6D6D9600422DAE /* UIViewExtension.swift in Sources */,
+				B50C46831F6D6EA800422DAE /* GameOverlay.swift in Sources */,
 				B50CC5641F409ACA00447271 /* GameLogicDelegate.swift in Sources */,
 				B56ED6811F3F4EAF00C6FA20 /* Presentable.swift in Sources */,
 				B50CC56A1F409CAE00447271 /* BlockFactory.swift in Sources */,
@@ -314,6 +329,7 @@
 				B5D6F1B81F405CA60057F7E2 /* GameLogicProtocol.swift in Sources */,
 				B5D6F1BC1F405E4C0057F7E2 /* CGRectExtension.swift in Sources */,
 				B56ED6851F3F5EEB00C6FA20 /* GameProtocol.swift in Sources */,
+				B50C467F1F6D6A1800422DAE /* Button.swift in Sources */,
 				B5D6F1BA1F405CAD0057F7E2 /* GameLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

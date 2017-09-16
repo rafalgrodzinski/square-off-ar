@@ -11,9 +11,11 @@ import ARKit
 
 class GameSceneViewController: UIViewController, Presentable {
     // MARK: - Initialization
-     let game: GameProtocol
-    init(game: GameProtocol) {
+    let game: GameProtocol
+    let gameOverlay: GameOverlayProtocol
+    init(game: GameProtocol, gameOverlay: GameOverlayProtocol) {
         self.game = game
+        self.gameOverlay = gameOverlay
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -26,6 +28,7 @@ class GameSceneViewController: UIViewController, Presentable {
     }
 
     override func viewDidLoad() {
+        setupOverlay()
         setupARScene()
         setupTouchDetection()
     }
@@ -34,6 +37,15 @@ class GameSceneViewController: UIViewController, Presentable {
         guard let arView = view as? ARSCNView else { fatalError() }
         return arView
     }()
+
+    private func setupOverlay() {
+        arView.overlaySKScene = gameOverlay.scene
+        gameOverlay.showMainMenu()
+        gameOverlay.playButtonPressed = { [weak self] in
+            self?.game.startGame()
+        }
+    }
+
     private func setupARScene() {
         arView.delegate = self
         arView.scene = game.scene

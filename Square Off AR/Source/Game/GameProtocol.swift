@@ -11,6 +11,8 @@ import ARKit
 protocol GameProtocol {
     var scene: SCNScene { get }
     var isLookingForSurface: Bool { get }
+
+    func startGame()
     func tapped()
     func swipped(direction: CGPoint)
     func updated(cameraTransform: SCNMatrix4)

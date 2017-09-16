@@ -7,6 +7,7 @@
 //
 
 enum GameState {
+    case showingMenu
     case lookingForSurface
     case placingBoard
     case waitingForMove
@@ -17,6 +18,7 @@ enum GameState {
 protocol GameLogicProtocol {
     var state: GameState { get }
 
+    func gameStarted()
     func surfaceFound()
     func boardPlaced()
     func blockPlaced()

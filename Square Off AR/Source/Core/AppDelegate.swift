@@ -15,10 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let container: Container = {
         let container = Container()
         container.register(Presentable.self, name: "GameScene") { r in
-            GameSceneViewController(game: r.resolve(GameProtocol.self)!)
+            GameSceneViewController(game: r.resolve(GameProtocol.self)!,
+                                    gameOverlay: r.resolve(GameOverlayProtocol.self)!)
         }
         container.register(GameProtocol.self) { r in
             Game(gameLogic: r.resolve(GameLogicProtocol.self)!)
+        }
+        container.register(GameOverlayProtocol.self) { _ in
+            GameOverlay()
         }
         container.register(GameLogicProtocol.self) { r in
             GameLogic(blockFactory: r.resolve(BlockGeneratable.self)!)
