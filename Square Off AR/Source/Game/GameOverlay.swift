@@ -49,6 +49,17 @@ class GameOverlay: SKScene {
         infoLabelShadow.fontColor = UIColor.black
         infoLabelShadow.position.x += 1.5
         infoLabelShadow.position.y -= 1.5
+
+        highScoreLabel = SKLabelNode()
+        highScoreLabel.fontColor = UIColor.white
+        highScoreLabel.fontSize = 32.0
+        highScoreLabel.fontName = "BunakenUnderwater"
+        highScoreLabel.position = CGPoint(x: size.width * 0.5,
+                                          y: size.height * 0.5 - replayButton.size.height * 0.5 - highScoreLabel.fontSize * 2.0)
+        highScoreLabelShadow = highScoreLabel.copy() as! SKLabelNode
+        highScoreLabelShadow.fontColor = UIColor.black
+        highScoreLabelShadow.position.x += 1.5
+        highScoreLabelShadow.position.y -= 1.5
     }
 
     private func setupGameOverItem() {
@@ -77,6 +88,20 @@ class GameOverlay: SKScene {
         infoLabelShadow.text = infoLabel.text
         finalScoreLabel.text = "Height: \(formatter.string(from: privateHeight))"
         finalScoreLabelShadow.text = finalScoreLabel.text
+
+        var score = Measurement(value: 0.0, unit: UnitLength.meters)
+        if let highScoreValue = UserDefaults.standard.value(forKey: "kHighScore") as? Double {
+            score = Measurement(value: highScoreValue, unit: UnitLength.meters)
+        }
+
+        if privateHeight > score {
+            UserDefaults.standard.setValue(privateHeight.value, forKey: "kHighScore")
+            highScoreLabel.text = "New Top Height: \(formatter.string(from: privateHeight))"
+            highScoreLabelShadow.text = highScoreLabel.text
+        } else if score.value > 0.0 {
+            highScoreLabel.text = "Top Height: \(formatter.string(from: score))"
+            highScoreLabelShadow.text = highScoreLabel.text
+        }
     }
 
     // MARK: - Private
@@ -87,6 +112,8 @@ class GameOverlay: SKScene {
     private var infoLabelShadow: SKLabelNode!
     private var finalScoreLabel: SKLabelNode!
     private var finalScoreLabelShadow: SKLabelNode!
+    private var highScoreLabel: SKLabelNode!
+    private var highScoreLabelShadow: SKLabelNode!
     private var playAgainButton: Button!
     private var privateHeight: Measurement<UnitLength> = Measurement(value: 0.0, unit: UnitLength.meters)
 }
@@ -120,6 +147,9 @@ extension GameOverlay: GameOverlayProtocol {
         removeAllChildren()
         addChild(playButton)
         addChild(logo)
+        addChild(highScoreLabelShadow)
+        addChild(highScoreLabel)
+        updateHeightLabel()
     }
 
     func showGameOverlay() {
@@ -137,6 +167,8 @@ extension GameOverlay: GameOverlayProtocol {
         addChild(finalScoreLabelShadow)
         addChild(finalScoreLabel)
         addChild(playAgainButton)
+        addChild(highScoreLabelShadow)
+        addChild(highScoreLabel)
     }
 
     func showInfo(message: String) {
