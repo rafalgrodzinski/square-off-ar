@@ -201,7 +201,10 @@ extension Game: GameLogicDelegate {
 
 extension Game: SCNPhysicsContactDelegate {
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        if gameLogic.state != .checkingResult { return }
+        let isCurrentNode = contact.nodeA == currentBlock || contact.nodeB == currentBlock
+        if isCurrentNode && currentBlock!.opacity < 0.9 {
+            return
+        }
         var isFloor = false
         isFloor = contact.nodeA === floorNode || contact.nodeB === floorNode
         var isBoard = false
