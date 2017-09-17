@@ -17,6 +17,7 @@ protocol GameOverlayProtocol: class {
     func showMainMenu()
     func showGameOverlay()
     func showGameOverOverlay()
+    func showInfo(message: String)
 }
 
 extension GameOverlayProtocol where Self: SKScene {

@@ -38,10 +38,12 @@ class GameOverlay: SKScene {
                                         y: size.height - replayButton.size.height * 0.5)
 
         infoLabel = SKLabelNode()
+        infoLabel.horizontalAlignmentMode = .left
         infoLabel.fontColor = UIColor.white
         infoLabel.fontSize = 32.0
         infoLabel.fontName = "BunakenUnderwater"
-        infoLabel.position = CGPoint(x: size.width * 0.5, y: replayButton.position.y)
+        infoLabel.position = CGPoint(x: replayButton.position.x + replayButton.size.width * 0.5,
+                                     y: size.height - replayButton.size.height * 0.7)
 
         infoLabelShadow = infoLabel.copy() as! SKLabelNode
         infoLabelShadow.fontColor = UIColor.black
@@ -130,8 +132,15 @@ extension GameOverlay: GameOverlayProtocol {
 
     func showGameOverOverlay() {
         removeAllChildren()
+        addChild(infoLabelShadow)
+        addChild(infoLabel)
         addChild(finalScoreLabelShadow)
         addChild(finalScoreLabel)
         addChild(playAgainButton)
+    }
+
+    func showInfo(message: String) {
+        infoLabel.text = message
+        infoLabelShadow.text = infoLabel.text
     }
 }

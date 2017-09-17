@@ -122,4 +122,8 @@ extension GameSceneViewController: GameDelegate {
     func gameOver() {
         gameOverlay.showGameOverOverlay()
     }
+
+    func showInfo(message: String) {
+        gameOverlay.showInfo(message: message)
+    }
 }

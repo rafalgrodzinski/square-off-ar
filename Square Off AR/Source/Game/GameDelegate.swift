@@ -12,4 +12,5 @@ protocol GameDelegate {
     var height: Measurement<UnitLength> { get set }
 
     func gameOver()
+    func showInfo(message: String)
 }

@@ -60,11 +60,13 @@ class Game: SCNScene {
         if gameLogic.state != .lookingForSurface { return }
         setupScene()
         rootNode.opacity = 0.5
+        delegate?.showInfo(message: "Tap to Place")
     }
 
     private func placeBoard() {
         rootNode.opacity = 1.0
         gameLogic.boardPlaced()
+        delegate?.height = Measurement(value: 0.0, unit: UnitLength.meters)
     }
 
     private func update(sceneTransform: SCNMatrix4) {
@@ -97,6 +99,12 @@ class Game: SCNScene {
         currentBlock.transform = SCNMatrix4Mult(scnNewRotationMatrix, currentBlock.transform)
     }
 
+    private func showStabilizingMessage() {
+        let messages = ["Will it stand? 😯", "... 😳", "Settling down... 😨", "It should work 😨", "Uh oh 😬"]
+        let message = messages[Int(arc4random() % UInt32(messages.count))]
+        delegate?.showInfo(message: message)
+    }
+
     // MARK: - Private
     private var currentBlock: SCNNode?
     private var currentBlockLastSwipe = CGPoint.zero
@@ -110,6 +118,7 @@ extension Game: GameProtocol {
 
     func startGame() {
         gameLogic.gameStarted()
+        delegate?.showInfo(message: "Looking for Surface")
     }
 
     func restartGame() {
@@ -119,6 +128,7 @@ extension Game: GameProtocol {
         }
         delegate?.height = Measurement(value: 0.0, unit: UnitLength.meters)
         gameLogic.gameStarted()
+        delegate?.showInfo(message: "Looking for Surface")
     }
     
     func tapped() {
@@ -131,6 +141,7 @@ extension Game: GameProtocol {
                 let fadeAction = SCNAction.fadeIn(duration: 0.3)
                 fadeAction.timingMode = .easeInEaseOut
                 currentBlock?.runAction(fadeAction)
+                showStabilizingMessage()
                 gameLogic.blockPlaced()
             default:
                 break
@@ -193,6 +204,7 @@ extension Game: SCNPhysicsContactDelegate {
         isBoard = contact.nodeA === boardNode || contact.nodeB === boardNode
 
         if isFloor && !isBoard {
+            delegate?.showInfo(message: "It collapsed! 😓")
             gameLogic.blocksCollapsed()
             delegate?.gameOver()
         }
