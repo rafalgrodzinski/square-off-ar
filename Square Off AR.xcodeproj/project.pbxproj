@@ -23,6 +23,7 @@
 		B56ED6831F3F5A0200C6FA20 /* GameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6821F3F5A0200C6FA20 /* GameSceneViewController.swift */; };
 		B56ED6851F3F5EEB00C6FA20 /* GameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6841F3F5EEB00C6FA20 /* GameProtocol.swift */; };
 		B58600EF1F424B3000F2D328 /* BlockGeneratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58600EE1F424B3000F2D328 /* BlockGeneratable.swift */; };
+		B5BF1A481F6DD84C00ECBE2A /* GameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF1A471F6DD84C00ECBE2A /* GameDelegate.swift */; };
 		B5D6F1B81F405CA60057F7E2 /* GameLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1B71F405CA60057F7E2 /* GameLogicProtocol.swift */; };
 		B5D6F1BA1F405CAD0057F7E2 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1B91F405CAD0057F7E2 /* GameLogic.swift */; };
 		B5D6F1BC1F405E4C0057F7E2 /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */; };
@@ -55,6 +56,7 @@
 		B56ED6861F3F600C00C6FA20 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		B58600EE1F424B3000F2D328 /* BlockGeneratable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGeneratable.swift; sourceTree = "<group>"; };
 		B5A762171F3CF51800C90EC8 /* Square Off AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Square Off AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5BF1A471F6DD84C00ECBE2A /* GameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDelegate.swift; sourceTree = "<group>"; };
 		B5D6F1B71F405CA60057F7E2 /* GameLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogicProtocol.swift; sourceTree = "<group>"; };
 		B5D6F1B91F405CAD0057F7E2 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 		B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				B56ED6821F3F5A0200C6FA20 /* GameSceneViewController.swift */,
 				B56ED6841F3F5EEB00C6FA20 /* GameProtocol.swift */,
+				B5BF1A471F6DD84C00ECBE2A /* GameDelegate.swift */,
 				B56ED6861F3F600C00C6FA20 /* Game.swift */,
 				B5D6F1B71F405CA60057F7E2 /* GameLogicProtocol.swift */,
 				B50CC5631F409ACA00447271 /* GameLogicDelegate.swift */,
@@ -326,6 +329,7 @@
 				B56ED6811F3F4EAF00C6FA20 /* Presentable.swift in Sources */,
 				B50CC56A1F409CAE00447271 /* BlockFactory.swift in Sources */,
 				B515510A1F459C8F00EA0A4F /* Game.swift in Sources */,
+				B5BF1A481F6DD84C00ECBE2A /* GameDelegate.swift in Sources */,
 				B5D6F1B81F405CA60057F7E2 /* GameLogicProtocol.swift in Sources */,
 				B5D6F1BC1F405E4C0057F7E2 /* CGRectExtension.swift in Sources */,
 				B56ED6851F3F5EEB00C6FA20 /* GameProtocol.swift in Sources */,

@@ -17,9 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         container.register(Presentable.self, name: "GameScene") { r in
             GameSceneViewController(game: r.resolve(GameProtocol.self)!,
                                     gameOverlay: r.resolve(GameOverlayProtocol.self)!)
-        }
+            }
         container.register(GameProtocol.self) { r in
             Game(gameLogic: r.resolve(GameLogicProtocol.self)!)
+        }.initCompleted { r, c in
+            let game = c as! Game
+            game.delegate = r.resolve(Presentable.self, name: "GameScene") as? GameDelegate
         }
         container.register(GameOverlayProtocol.self) { _ in
             GameOverlay()

@@ -107,3 +107,11 @@ extension GameSceneViewController: ARSCNViewDelegate {
         game.updatedPhysics()
     }
 }
+
+// MARK: - GameDelegate
+extension GameSceneViewController: GameDelegate {
+    var height: Measurement<UnitLength> {
+        get { return gameOverlay.height }
+        set { gameOverlay.height = newValue }
+    }
+}

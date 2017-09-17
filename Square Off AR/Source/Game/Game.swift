@@ -11,6 +11,7 @@ import ARKit
 class Game: SCNScene {
     // MARK: - Initialization
     private let gameLogic: GameLogicProtocol
+    var delegate: GameDelegate?
     init(gameLogic: GameLogicProtocol) {
         self.gameLogic = gameLogic
         super.init()
@@ -156,6 +157,7 @@ extension Game: GameProtocol {
         if gameLogic.state == .checkingResult && currentBlock?.physicsBody?.isResting == true {
             currentBlock = nil
             let height = rootNode.boundingBox.max.y - rootNode.boundingBox.min.y
+            delegate?.height = Measurement(value: Double(height), unit: UnitLength.meters)
             gameLogic.blockStabilized(with: height)
         }
     }
