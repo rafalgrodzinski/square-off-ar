@@ -45,6 +45,10 @@ class GameSceneViewController: UIViewController, Presentable {
             self?.gameOverlay.showGameOverlay()
             self?.game.startGame()
         }
+        gameOverlay.restartButtonPressed = { [weak self] in
+            self?.gameOverlay.showGameOverlay()
+            self?.game.restartGame()
+        }
     }
 
     private func setupARScene() {
@@ -113,5 +117,9 @@ extension GameSceneViewController: GameDelegate {
     var height: Measurement<UnitLength> {
         get { return gameOverlay.height }
         set { gameOverlay.height = newValue }
+    }
+
+    func gameOver() {
+        gameOverlay.showGameOverOverlay()
     }
 }

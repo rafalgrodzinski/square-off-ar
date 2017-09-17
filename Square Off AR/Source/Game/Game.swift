@@ -111,6 +111,15 @@ extension Game: GameProtocol {
     func startGame() {
         gameLogic.gameStarted()
     }
+
+    func restartGame() {
+        rootNode.childNodes.forEach {
+            $0.removeAllActions()
+            $0.removeFromParentNode()
+        }
+        delegate?.height = Measurement(value: 0.0, unit: UnitLength.meters)
+        gameLogic.gameStarted()
+    }
     
     func tapped() {
         switch gameLogic.state {
@@ -158,7 +167,7 @@ extension Game: GameProtocol {
             currentBlock = nil
             let height = rootNode.boundingBox.max.y - rootNode.boundingBox.min.y
             delegate?.height = Measurement(value: Double(height), unit: UnitLength.meters)
-            gameLogic.blockStabilized(with: height)
+            gameLogic.blockStabilized()
         }
     }
 }
@@ -184,7 +193,8 @@ extension Game: SCNPhysicsContactDelegate {
         isBoard = contact.nodeA === boardNode || contact.nodeB === boardNode
 
         if isFloor && !isBoard {
-            //gameLogic.blocksCollapsed()
+            gameLogic.blocksCollapsed()
+            delegate?.gameOver()
         }
     }
 }

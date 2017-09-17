@@ -13,6 +13,7 @@ protocol GameProtocol {
     var isLookingForSurface: Bool { get }
 
     func startGame()
+    func restartGame()
     func tapped()
     func swipped(direction: CGPoint)
     func updated(cameraTransform: SCNMatrix4)

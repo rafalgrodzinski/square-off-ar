@@ -15,6 +15,7 @@ class GameOverlay: SKScene {
         super.init(size: UIScreen.main.bounds.size)
         setupMenuItems()
         setupGameItems()
+        setupGameOverItem()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -39,11 +40,28 @@ class GameOverlay: SKScene {
         heightLabel.position = CGPoint(x: size.width * 0.5, y: replayButton.position.y)
     }
 
+    private func setupGameOverItem() {
+        finalScoreLabel = SKLabelNode()
+        finalScoreLabel.fontSize = 32.0
+        finalScoreLabel.position = CGPoint(x: size.width * 0.5,
+                                           y: size.height * 0.5 + 80.0)
+
+        playAgainLabel = SKLabelNode()
+        playAgainLabel.text = "Play Again?"
+        playAgainLabel.fontSize = 32.0
+        playAgainLabel.position = CGPoint(x: size.width * 0.5,
+                                          y: size.height * 0.5 + 40.0)
+
+        playAgainButton = Button(defaultTexture: SKTexture(imageNamed: "Replay Button"))
+        playAgainButton.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+    }
+
     // MARK: - Update
     private func updateHeightLabel() {
         let formatter = MeasurementFormatter()
         formatter.unitOptions = [ .naturalScale ]
         heightLabel.text = "Height: \(formatter.string(from: privateHeight))"
+        finalScoreLabel.text = "Height: \(formatter.string(from: privateHeight))"
     }
 
     // MARK: - Private
@@ -51,6 +69,9 @@ class GameOverlay: SKScene {
     private var playButton: Button!
     private var replayButton: Button!
     private var heightLabel: SKLabelNode!
+    private var finalScoreLabel: SKLabelNode!
+    private var playAgainLabel: SKLabelNode!
+    private var playAgainButton: Button!
     private var privateHeight: Measurement<UnitLength> = Measurement(value: 0.0, unit: UnitLength.meters)
 }
 
@@ -59,6 +80,15 @@ extension GameOverlay: GameOverlayProtocol {
     var playButtonPressed: (() -> Void)? {
         get { return playButton.callback }
         set { playButton.callback = newValue }
+    }
+    var restartButtonPressed: (() -> Void)? {
+        get {
+            return replayButton.callback
+        }
+        set {
+            replayButton.callback = newValue
+            playAgainButton.callback = newValue
+        }
     }
     var height: Measurement<UnitLength> {
         get {
@@ -81,5 +111,12 @@ extension GameOverlay: GameOverlayProtocol {
         addChild(replayButton)
         addChild(heightLabel)
         updateHeightLabel()
+    }
+
+    func showGameOverOverlay() {
+        removeAllChildren()
+        addChild(playAgainLabel)
+        addChild(finalScoreLabel)
+        addChild(playAgainButton)
     }
 }

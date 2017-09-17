@@ -9,7 +9,6 @@
 class GameLogic {
     // MARK: - Initialization
     private var blockFactory: BlockGeneratable
-    private var blocksHeight: Float = 0.0
 
     init(blockFactory: BlockGeneratable) {
         self.blockFactory = blockFactory
@@ -45,16 +44,12 @@ extension GameLogic: GameLogicProtocol {
         gameState = .checkingResult
     }
 
-    func blockStabilized(with height: Float) {
+    func blockStabilized() {
         gameState = .waitingForMove
-        blocksHeight = height
-        print("Current height \(blocksHeight)")
         showNewBlock()
     }
 
     func blocksCollapsed() {
         gameState = .gameFinished
-
-        print("Game over at \(blocksHeight)")
     }
 }

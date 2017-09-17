@@ -10,4 +10,6 @@ import Foundation
 
 protocol GameDelegate {
     var height: Measurement<UnitLength> { get set }
+
+    func gameOver()
 }

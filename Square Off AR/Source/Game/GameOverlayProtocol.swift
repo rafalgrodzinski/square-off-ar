@@ -11,10 +11,12 @@ import SpriteKit
 protocol GameOverlayProtocol: class {
     var scene: SKScene { get }
     var playButtonPressed: (() -> Void)? { get set }
+    var restartButtonPressed: (() -> Void)? { get set }
     var height: Measurement<UnitLength> { get set }
 
     func showMainMenu()
     func showGameOverlay()
+    func showGameOverOverlay()
 }
 
 extension GameOverlayProtocol where Self: SKScene {
