@@ -192,6 +192,10 @@ extension Game: GameLogicDelegate {
         fadeAction.timingMode = .easeInEaseOut
         currentBlock?.runAction(fadeAction)
         rootNode.addChildNode(block)
+
+        let angX = Float.pi * 2.0 / (1000.0 / Float(arc4random() % 1000))
+        let angY = Float.pi * 2.0 / (1000.0 / Float(arc4random() % 1000))
+        rotateCurrentBlock(angleX: angX, angleY: angY)
     }
 }
 
