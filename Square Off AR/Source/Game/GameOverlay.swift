@@ -24,7 +24,8 @@ class GameOverlay: SKScene {
 
     private func setupMenuItems() {
         logo = SKSpriteNode(texture: SKTexture(imageNamed: "Logo"))
-        logo.position = CGPoint(x: size.width * 0.5, y: size.height * 0.8)
+        logo.position = CGPoint(x: size.width * 0.5,
+                                y: size.height - logo.size.height*0.5 - 50.0)
 
         playButton = Button(defaultTexture: SKTexture(imageNamed: "Play Button"))
         playButton.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
@@ -32,8 +33,9 @@ class GameOverlay: SKScene {
 
     private func setupGameItems() {
         replayButton = Button(defaultTexture: SKTexture(imageNamed: "Replay Button"))
-        replayButton.position = CGPoint(x: replayButton.size.width * 0.75,
-                                        y: size.height - replayButton.size.height * 0.75)
+        replayButton.setScale(0.5)
+        replayButton.position = CGPoint(x: replayButton.size.width * 0.5,
+                                        y: size.height - replayButton.size.height * 0.5)
 
         heightLabel = SKLabelNode()
         heightLabel.fontSize = 32.0

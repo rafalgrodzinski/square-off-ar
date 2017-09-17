@@ -56,7 +56,7 @@ class GameSceneViewController: UIViewController, Presentable {
         arView.scene = game.scene
         let arConfig = ARWorldTrackingConfiguration()
         arView.session.run(arConfig)
-        arView.showsStatistics = true
+        //arView.showsStatistics = true
     }
 
     private func setupTouchDetection() {
