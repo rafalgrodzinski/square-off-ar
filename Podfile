@@ -3,4 +3,6 @@ use_frameworks!
 
 target 'Square Off AR' do
     pod 'Swinject'
+    pod 'Crashlytics'
+    pod 'Fabric'
 end

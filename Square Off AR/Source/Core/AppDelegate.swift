@@ -8,6 +8,8 @@
 
 import UIKit
 import Swinject
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        #if !DEBUG
+            Fabric.with([Crashlytics.self])
+        #endif
+
         window = UIWindow(frame: UIScreen.main.bounds)
         let gameScene = container.resolve(Presentable.self, name: "GameScene")
         window?.rootViewController = gameScene?.viewController

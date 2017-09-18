@@ -8,6 +8,7 @@
 
 import UIKit
 import ARKit
+import Crashlytics
 
 class GameSceneViewController: UIViewController, Presentable {
     // MARK: - Initialization
@@ -42,10 +43,16 @@ class GameSceneViewController: UIViewController, Presentable {
         arView.overlaySKScene = gameOverlay.scene
         gameOverlay.showMainMenu()
         gameOverlay.playButtonPressed = { [weak self] in
+            #if !DEBUG
+                Answers.logCustomEvent(withName: "Game", customAttributes: ["Action": "Started"])
+            #endif
             self?.gameOverlay.showGameOverlay()
             self?.game.startGame()
         }
         gameOverlay.restartButtonPressed = { [weak self] in
+            #if !DEBUG
+                Answers.logCustomEvent(withName: "Game", customAttributes: ["Action": "Restarted"])
+            #endif
             self?.gameOverlay.showGameOverlay()
             self?.game.restartGame()
         }
@@ -56,7 +63,9 @@ class GameSceneViewController: UIViewController, Presentable {
         arView.scene = game.scene
         let arConfig = ARWorldTrackingConfiguration()
         arView.session.run(arConfig)
-        arView.showsStatistics = true
+        #if DEBUG
+            arView.showsStatistics = true
+        #endif
     }
 
     private func setupTouchDetection() {

@@ -1,12 +1,19 @@
 PODS:
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - Swinject (2.0.0)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - Swinject
 
 SPEC CHECKSUMS:
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
 
-PODFILE CHECKSUM: e10e33d12bf4a58d2050d4c1c083eeed3f1a0a6b
+PODFILE CHECKSUM: 7d675eaa12495c719e15c4ffbe413690e08f5274
 
 COCOAPODS: 1.2.1

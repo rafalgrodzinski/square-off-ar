@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import Crashlytics
 
 
 class GameOverlay: SKScene {
@@ -161,6 +162,11 @@ extension GameOverlay: GameOverlayProtocol {
     }
 
     func showGameOverOverlay() {
+        #if !DEBUG
+            Answers.logCustomEvent(withName: "Game", customAttributes: ["Action": "Finished",
+                                                                        "Height": height.value])
+        #endif
+
         removeAllChildren()
         addChild(infoLabelShadow)
         addChild(infoLabel)

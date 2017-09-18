@@ -207,6 +207,7 @@
 				B5A762151F3CF51800C90EC8 /* Resources */,
 				75940770ED54A2F4B7A96423 /* [CP] Embed Pods Frameworks */,
 				ED2AA04168DE7491BD2230D3 /* [CP] Copy Pods Resources */,
+				B5CF49161F707BA0008D1D34 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -299,6 +300,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Square Off AR/Pods-Square Off AR-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B5CF49161F707BA0008D1D34 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    fabricBuildSecretFilePath=\"${PROJECT_DIR}/../private/fabric/fabric_build_secret.txt\"\n\n    if [ -e \"${fabricBuildSecretFilePath}\" ]; then\n        \"${PODS_ROOT}/Fabric/run\" a021a108c4f7af7ac61e5074ce2ce6b5b0729c4b `cat \"${fabricBuildSecretFilePath}\"`\n    fi\nfi";
 		};
 		ED2AA04168DE7491BD2230D3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
