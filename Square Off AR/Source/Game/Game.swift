@@ -44,7 +44,7 @@ class Game: SCNScene {
         floorNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         floorNode.physicsBody?.isAffectedByGravity = false
         floorNode.physicsBody?.categoryBitMask = 1
-        floorNode.physicsBody?.contactTestBitMask = -1
+        floorNode.physicsBody?.contactTestBitMask = 1
         floorNode.physicsBody?.collisionBitMask = 1
         rootNode.addChildNode(floorNode)
         self.floorNode = floorNode

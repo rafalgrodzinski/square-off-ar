@@ -14,8 +14,12 @@
 		B50CC5621F4091C900447271 /* Wood.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E4E2FB1F40910A00D0EF4B /* Wood.png */; };
 		B50CC5641F409ACA00447271 /* GameLogicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50CC5631F409ACA00447271 /* GameLogicDelegate.swift */; };
 		B50CC56A1F409CAE00447271 /* BlockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50CC5691F409CAE00447271 /* BlockFactory.swift */; };
-		B50CC56C1F409E6300447271 /* Block A.scn in Resources */ = {isa = PBXBuildFile; fileRef = B50CC56B1F409E6300447271 /* Block A.scn */; };
 		B515510A1F459C8F00EA0A4F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6861F3F600C00C6FA20 /* Game.swift */; };
+		B52DB07A1F6F34A60054AF1B /* Block A.scn in Resources */ = {isa = PBXBuildFile; fileRef = B52DB0791F6F34A60054AF1B /* Block A.scn */; };
+		B52DB07C1F704E1C0054AF1B /* Block B.scn in Resources */ = {isa = PBXBuildFile; fileRef = B52DB07B1F704E1C0054AF1B /* Block B.scn */; };
+		B52DB0801F7053650054AF1B /* Block C.scn in Resources */ = {isa = PBXBuildFile; fileRef = B52DB07D1F704F260054AF1B /* Block C.scn */; };
+		B52DB0811F7053670054AF1B /* Block D.scn in Resources */ = {isa = PBXBuildFile; fileRef = B52DB07F1F704F340054AF1B /* Block D.scn */; };
+		B52DB0821F70536A0054AF1B /* Block E.scn in Resources */ = {isa = PBXBuildFile; fileRef = B52DB07E1F704F280054AF1B /* Block E.scn */; };
 		B56ED67C1F3D017600C6FA20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ED6791F3D016B00C6FA20 /* AppDelegate.swift */; };
 		B56ED67D1F3D017A00C6FA20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56ED6741F3D016B00C6FA20 /* Assets.xcassets */; };
 		B56ED67E1F3D017E00C6FA20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B56ED6751F3D016B00C6FA20 /* LaunchScreen.storyboard */; };
@@ -30,10 +34,6 @@
 		B5D6F1BC1F405E4C0057F7E2 /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1BB1F405E4C0057F7E2 /* CGRectExtension.swift */; };
 		B5D6F1BE1F4060AA0057F7E2 /* SCNMatrix4Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D6F1BD1F4060AA0057F7E2 /* SCNMatrix4Extension.swift */; };
 		B5E4E2F91F40883F00D0EF4B /* Board.scn in Resources */ = {isa = PBXBuildFile; fileRef = B5E4E2F81F40883F00D0EF4B /* Board.scn */; };
-		B5F965BF1F4871240055E97C /* Block B.scn in Resources */ = {isa = PBXBuildFile; fileRef = B5F965BD1F486E900055E97C /* Block B.scn */; };
-		B5F965C01F4871260055E97C /* Block C.scn in Resources */ = {isa = PBXBuildFile; fileRef = B5F965BE1F486FBE0055E97C /* Block C.scn */; };
-		B5F965C31F4876000055E97C /* Block E.scn in Resources */ = {isa = PBXBuildFile; fileRef = B5F965C21F4875B10055E97C /* Block E.scn */; };
-		B5F965C41F4876030055E97C /* Block D.scn in Resources */ = {isa = PBXBuildFile; fileRef = B5F965C11F4874E90055E97C /* Block D.scn */; };
 		C17D122949535B1562596A97 /* Pods_Square_Off_AR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36346C47AA4E5B394946B990 /* Pods_Square_Off_AR.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,11 @@
 		B50C46841F6D6EC500422DAE /* GameOverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverlayProtocol.swift; sourceTree = "<group>"; };
 		B50CC5631F409ACA00447271 /* GameLogicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogicDelegate.swift; sourceTree = "<group>"; };
 		B50CC5691F409CAE00447271 /* BlockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockFactory.swift; sourceTree = "<group>"; };
-		B50CC56B1F409E6300447271 /* Block A.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block A.scn"; sourceTree = "<group>"; };
+		B52DB0791F6F34A60054AF1B /* Block A.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block A.scn"; sourceTree = "<group>"; };
+		B52DB07B1F704E1C0054AF1B /* Block B.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block B.scn"; sourceTree = "<group>"; };
+		B52DB07D1F704F260054AF1B /* Block C.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block C.scn"; sourceTree = "<group>"; };
+		B52DB07E1F704F280054AF1B /* Block E.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block E.scn"; sourceTree = "<group>"; };
+		B52DB07F1F704F340054AF1B /* Block D.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block D.scn"; sourceTree = "<group>"; };
 		B56ED6741F3D016B00C6FA20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B56ED6761F3D016B00C6FA20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B56ED6791F3D016B00C6FA20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,10 +69,6 @@
 		B5D6F1BD1F4060AA0057F7E2 /* SCNMatrix4Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMatrix4Extension.swift; sourceTree = "<group>"; };
 		B5E4E2F81F40883F00D0EF4B /* Board.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Board.scn; sourceTree = "<group>"; };
 		B5E4E2FB1F40910A00D0EF4B /* Wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wood.png; sourceTree = "<group>"; };
-		B5F965BD1F486E900055E97C /* Block B.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block B.scn"; sourceTree = "<group>"; };
-		B5F965BE1F486FBE0055E97C /* Block C.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block C.scn"; sourceTree = "<group>"; };
-		B5F965C11F4874E90055E97C /* Block D.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block D.scn"; sourceTree = "<group>"; };
-		B5F965C21F4875B10055E97C /* Block E.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "Block E.scn"; sourceTree = "<group>"; };
 		BCC493ED9D65BCC94D6817DC /* Pods-Square Off AR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Square Off AR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Square Off AR/Pods-Square Off AR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,11 +110,11 @@
 				B5B430441F6F035600A4A777 /* BunakenUnderwater.ttf */,
 				B5E4E2F81F40883F00D0EF4B /* Board.scn */,
 				B5E4E2FB1F40910A00D0EF4B /* Wood.png */,
-				B50CC56B1F409E6300447271 /* Block A.scn */,
-				B5F965BD1F486E900055E97C /* Block B.scn */,
-				B5F965BE1F486FBE0055E97C /* Block C.scn */,
-				B5F965C11F4874E90055E97C /* Block D.scn */,
-				B5F965C21F4875B10055E97C /* Block E.scn */,
+				B52DB0791F6F34A60054AF1B /* Block A.scn */,
+				B52DB07B1F704E1C0054AF1B /* Block B.scn */,
+				B52DB07D1F704F260054AF1B /* Block C.scn */,
+				B52DB07F1F704F340054AF1B /* Block D.scn */,
+				B52DB07E1F704F280054AF1B /* Block E.scn */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -254,16 +254,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F965C41F4876030055E97C /* Block D.scn in Resources */,
-				B5F965BF1F4871240055E97C /* Block B.scn in Resources */,
+				B52DB0811F7053670054AF1B /* Block D.scn in Resources */,
 				B50CC5621F4091C900447271 /* Wood.png in Resources */,
 				B5B430451F6F03AB00A4A777 /* BunakenUnderwater.ttf in Resources */,
-				B5F965C01F4871260055E97C /* Block C.scn in Resources */,
-				B50CC56C1F409E6300447271 /* Block A.scn in Resources */,
 				B5E4E2F91F40883F00D0EF4B /* Board.scn in Resources */,
-				B5F965C31F4876000055E97C /* Block E.scn in Resources */,
+				B52DB0801F7053650054AF1B /* Block C.scn in Resources */,
 				B56ED67D1F3D017A00C6FA20 /* Assets.xcassets in Resources */,
 				B56ED67E1F3D017E00C6FA20 /* LaunchScreen.storyboard in Resources */,
+				B52DB0821F70536A0054AF1B /* Block E.scn in Resources */,
+				B52DB07A1F6F34A60054AF1B /* Block A.scn in Resources */,
+				B52DB07C1F704E1C0054AF1B /* Block B.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.unalignedbyte.Square-Off-AR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -489,7 +489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.unalignedbyte.Square-Off-AR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
